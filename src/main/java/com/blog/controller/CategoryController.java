@@ -1,7 +1,6 @@
 package com.blog.controller;
 
 import java.util.List;
-import java.util.Map;
 
 import javax.validation.Valid;
 
@@ -18,31 +17,31 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.blog.payloads.ApiResponse;
-import com.blog.payloads.UserDto;
-import com.blog.services.UserService;
+import com.blog.payloads.CategoryDto;
+import com.blog.services.CategoryService;
 
 @RestController
-@RequestMapping("/api/users")
-public class UserController {
+@RequestMapping("/api/category")
+public class CategoryController {
 
 	@Autowired
-	private UserService userService;
+	private CategoryService categoryService;
 	
-//	create USER
+//	create Category
 	@PostMapping("/")
-	public ResponseEntity<UserDto> createUser(@Valid @RequestBody UserDto userDto){
-		UserDto createUserDto = this.userService.createUser(userDto);
-		return new ResponseEntity<>(createUserDto,(HttpStatus.CREATED));
+	public ResponseEntity<CategoryDto> createCategory(@Valid @RequestBody CategoryDto categoryDto){
+		CategoryDto createCategoryDto = this.categoryService.createCategory(categoryDto);
+		return new ResponseEntity<>(createCategoryDto,(HttpStatus.CREATED));
 		
 	}
 	
 	
 //	update USER
 	@PutMapping("/{id}")
-	public ResponseEntity<UserDto> updateUser(@Valid @RequestBody UserDto userDto, @PathVariable Integer id)
+	public ResponseEntity<CategoryDto> updateCategory(@Valid @RequestBody CategoryDto CategoryDto, @PathVariable Integer id)
 	{
-		UserDto updatedUser  = this.userService.updateUser(userDto, id);
-		return new ResponseEntity<UserDto>(updatedUser, HttpStatus.OK);
+		CategoryDto updatedCategory  = this.categoryService.updateCategory(CategoryDto, id);
+		return new ResponseEntity<CategoryDto>(updatedCategory, HttpStatus.OK);
 	}
 	
 	
@@ -50,7 +49,7 @@ public class UserController {
 	@DeleteMapping("/{id}")
 	public ResponseEntity<ApiResponse> deleteUser(@PathVariable Integer id)
 	{
-		this.userService.deleteUser( id);
+		this.categoryService.deleteCategory( id);
 //		return ResponseEntity.ok(Map.of("Message", "User Deleted successfully"));
 		return new ResponseEntity<ApiResponse>(new ApiResponse
 					("Deleted successfully", true), HttpStatus.OK);	
@@ -59,26 +58,12 @@ public class UserController {
 	
 //	Get users
 	@GetMapping("/")
-	public ResponseEntity<List<UserDto>> getAllUsers(){
-		return ResponseEntity.ok(this.userService.getAllUsers());
+	public ResponseEntity<List<CategoryDto>> getCategories(){
+		return ResponseEntity.ok(this.categoryService.getCategories());
 	}
 	
 	@GetMapping("/{id}")
-	public ResponseEntity<UserDto> getUserById(@PathVariable Integer id){
-		return ResponseEntity.ok(this.userService.getUserById(id));
+	public ResponseEntity<CategoryDto> getCategoryById(@PathVariable Integer id){
+		return ResponseEntity.ok(this.categoryService.getCategoryById(id));
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 }
