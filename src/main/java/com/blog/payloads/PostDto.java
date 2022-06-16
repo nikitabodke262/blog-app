@@ -1,6 +1,8 @@
 package com.blog.payloads;
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.Email;
@@ -8,6 +10,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
 import com.blog.entities.Category;
+import com.blog.entities.Comment;
 import com.blog.entities.User;
 
 import lombok.AllArgsConstructor;
@@ -38,6 +41,7 @@ public class PostDto {
 	
 	private UserDto user; 
 
+	private Set<CommentDto> comments =  new HashSet<>();
 
 
 }
